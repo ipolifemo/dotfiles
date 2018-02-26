@@ -1,0 +1,151 @@
+/!-------------------------------------------------------------------------------------------------------
+! Xft settings
+!-------------------------------------------------------------------------------------------------------
+! dpi calc: 
+! > ixrandr | grep -w connected
+! > XWAYLAND0 connected 1920x1080+0+0 (normal left inverted right x axis y axis) 480mm x 270mm
+! > 1920 / (48/2.56) ~~ 104
+!-------------------------------------------------------------------------------------------------------
+Xft.dpi:                    96        /* Could be 96 but my lcd is weird */
+Xft.antialias:              true
+Xft.rgba:                   none
+Xft.autohint:               true
+Xft.hinting:                true
+Xft.hintstyle:              hintslight
+!-------------------------------------------------------------------------------------------------------
+! URxvt settings
+! Colours lifted from Solarized (http://ethanschoonover.com/solarized)
+! More info at:
+! http://pod.tst.eu/http://cvs.schmorp.de/rxvt-unicode/doc/rxvt.1.pod
+!-------------------------------------------------------------------------------------------------------
+!-------------------------------------------------------------------------------------------------------
+! General settings
+!-------------------------------------------------------------------------------------------------------
+URxvt.depth:                32
+URxvt.geometry:             90x30
+URxvt.transparent:          true
+URxvt.shading:              20
+URxvt.fading:               10
+URxvt.urgentOnBell:         false /* default: true */
+URxvt.visualBell:           false /* default: true */
+URxvt.loginShell:           true
+URxvt.saveLines:            5000
+URxvt.internalBorder:       3
+URxvt.lineSpace:            0
+!-------------------------------------------------------------------------------------------------------
+!-------------------------------------------------------------------------------------------------------
+! Fonts
+!-------------------------------------------------------------------------------------------------------
+URxvt.allow_bold:           true 
+!
+! Terminus 12pt is an OK bitmap font if your vision is 30/20 and your
+! monitor is *not* hi-dpi...
+!
+!URxvt.font:           -*-terminus-medium-r-normal-*-12-120-72-72-c-60-iso8859-1
+!
+! In most installations DejaVu is the default monospace font, but you 
+! never know...
+!
+! If the monospace font is DejaVu, the styles are Book, Oblique,
+! Bold and BoldOblique.If the monospace font is *not* DejaVu, 
+! then you need first, to use 'fc-match monospace' to find the actual 
+! font in use and second, 'fc-list' to find out the style names that 
+! correspond to regular, bold and so on. A monospace font if named
+! honestly has Oblique styles, not Italic. But most font designers
+! lie through their teeth, particularly those of free fonts, who are
+! blissfully ignorant in those matters. In the words of Brinkhusrt,
+! they "steal sheep".
+!
+!-------------------------------------------------------------------------------------------------------
+URxvt*font:           xft:Source Code Pro for Powerline:style=Regular:pixelsize=13
+URxvt*italicFont:     xft:Source Code Pro for Powerline:style=Italic:pixelsize=13
+URxvt*boldFont:       xft:Source Code Pro for Powerline:style=Semibold:pixelsize=13
+URxvt*boldItalicFont: xft:Source Code Pro for Powerline:style=Semibold Italic:pixelsize=14
+
+!-------------------------------------------------------------------------------------------------------
+!! Fix font space
+!-------------------------------------------------------------------------------------------------------
+! URxvt*letterSpace: -1 /* Is it really needed? --nope, using patched version */
+!-------------------------------------------------------------------------------------------------------
+!! Scrollbar
+!-------------------------------------------------------------------------------------------------------
+URxvt.scrollStyle:          rxvt
+URxvt.scrollBar:            false
+!-------------------------------------------------------------------------------------------------------
+!! Perl extensions
+!-------------------------------------------------------------------------------------------------------
+! URxvt.perl-ext-common:      default,matcher
+! URxvt.matcher.button:       1
+! URxvt.urlLauncher:          chromium
+!--------------------------------------------------------------------------------------------------------------------------
+URxvt.perl-ext-common:				default,clipboard,url-select,keyboard-select,fullscreen,resize-font
+URxvt.url-select.launcher: 	  /usr/bin/xdg-open 	
+URxvt.url-select.underline: 	true
+URxvt.keysym.M-u:           	perl:url-select:select_next
+URxvt.keysym.M-Escape:      	perl:keyboard-select:activate
+URxvt.keysym.M-s:           	perl:keyboard-select:search
+URxvt.keysym.F11:           	perl:fullscreen:switch
+! URxvt.resize-font.smaller:  	C-Down  -- conflicts with tmux pane resizing
+! URxvt.resize-font.bigger:   	C-Up    -- same
+!-------------------------------------------------------------------------------------------------------
+!! Cursor
+!-------------------------------------------------------------------------------------------------------
+URxvt.cursorBlink:          true
+URxvt.cursorColor:          11
+URxvt.cursorUnderline:      false
+!-------------------------------------------------------------------------------------------------------
+!! Pointer
+!-------------------------------------------------------------------------------------------------------
+URxvt.pointerBlank:         true
+!-------------------------------------------------------------------------------------------------------
+! Solarized colors
+!
+! Source http://github.com/altercation/solarized
+!-------------------------------------------------------------------------------------------------------
+*background:                8
+*foreground:                11
+*fading:                    40
+*fadeColor:                 8
+*cursorColor:               14
+*pointerColorBackground:    10
+*pointerColorForeground:    14
+!-------------------------------------------------------------------------------------------------------
+! black dark/light
+!-------------------------------------------------------------------------------------------------------
+*color0:                    #073642
+*color8:                    #002b36
+!-------------------------------------------------------------------------------------------------------
+! red dark/light
+!-------------------------------------------------------------------------------------------------------
+*color1:                    #dc322f
+*color9:                    #cb4b16
+!-------------------------------------------------------------------------------------------------------
+! green dark/light
+!-------------------------------------------------------------------------------------------------------
+*color2:                    #859900
+*color10:                   #586e75
+!-------------------------------------------------------------------------------------------------------
+! yellow dark/light
+!-------------------------------------------------------------------------------------------------------
+*color3:                    #b58900
+*color11:                   #657b83
+!-------------------------------------------------------------------------------------------------------
+! blue dark/light
+!-------------------------------------------------------------------------------------------------------
+*color4:                    #268bd2
+*color12:                   #839496
+!-------------------------------------------------------------------------------------------------------
+! magenta dark/light
+!-------------------------------------------------------------------------------------------------------
+*color5:                    #d33682
+*color13:                   #6c71c4
+!-------------------------------------------------------------------------------------------------------
+! cyan dark/light
+!-------------------------------------------------------------------------------------------------------
+*color6:                    #2aa198
+*color14:                   #93a1a1
+!-------------------------------------------------------------------------------------------------------
+!! white dark/light
+!-------------------------------------------------------------------------------------------------------
+*color7:                    #eee8d5
+*color15:                   #fdf6e3

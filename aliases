@@ -1,0 +1,84 @@
+# Run this after editing any of your dotfiles
+alias src='source ~/.bashrc'
+alias :q='exit'
+alias :e='nvim -u /dev/null'
+alias vim='nvim -u /dev/null'
+
+alias l='ls -lartp'
+alias la='ls -la'
+alias lg='ls -la | grep'
+alias hg='history | grep'
+
+# .. is one of my most used commands
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+
+alias dots='cd ~/dotfiles'
+alias dotfiles='cd ~/dotfiles'
+
+alias cl='clear'
+
+alias lc='wc -l'
+
+# Git Specific
+# git commit all with message -- no quotes needed
+function gcm() { git commit -m "$*"; }
+alias gs='git status -sb'
+alias ga='git add'
+alias gb='git branch'
+alias gbg='git branch | grep'
+alias gd='git diff'
+alias glog="git log --graph --pretty=format:'%Cred%h%Creset %an: %s - %Creset %C(yellow)%d%Creset %Cgreen(%cr)%Creset' --abbrev-commit --date=relative"
+alias grim="git rebase -i master"
+alias gcl="git config --list"
+
+# gitk without the shell spew
+alias gk='gitk --all > /dev/null 2>&1 &'
+alias td='git diff | grep TODO'
+alias gap='git add -p'
+alias g-='git checkout -'
+alias gdom='git diff origin/master'
+
+alias py='python'
+
+alias yolo='kill -9'
+
+alias ali='nvim ~/.aliases'
+alias dotup='cd ~/dotfiles && ./bootstrap.sh && cd -'
+
+alias tf='tail -f'
+
+# But seriously, just use ack or ag
+alias grin='grep -rin'
+alias grev='grep -v'
+
+# necessary when using tmux: set -g default-terminal "screen-256color"
+# so things like top still work when SSHed to a remote host
+#alias ssh='TERM=xterm ssh'
+
+alias wtf='ping google.com'
+
+# Misc:
+alias timenow='date +"%s"'
+
+
+# signal aliases: just give them a pid
+alias quit='kill -s QUIT'
+alias usr2='kill -s USR2'
+
+alias duh='du -h'
+
+# Tmux
+alias tns='tmux new-session -s'
+alias sens='nvim ~/.sensitive'
+alias focus="nvim ~/.focush"
+alias tld='find ~/.tmuxifier/layouts/* -name *.window.sh | fzf-tmux | xargs tmuxifier load-window'
+#alias tmux='TERM=tmux-256color tmux'
+#alias t='TERM=tmux-256color tmux'
+
+
+# Add an "alert" alias for long running commands.  Use like so:
+# sleep 10; alert
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+

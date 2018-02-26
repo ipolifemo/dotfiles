@@ -1,0 +1,11 @@
+/* shrink headerbars */
+headerbar,
+.titlebar:not(headerbar) {
+  min-height: 0px;
+  min-height: 24px;
+  font-weight: bold;
+  font-size: small;
+}
+
+
+

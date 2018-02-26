@@ -1,0 +1,1 @@
+xsel -i -p && xsel -o -p | xsel -i -b
