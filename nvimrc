@@ -11,7 +11,12 @@ endif
 call plug#begin(expand($HOME . '/.config/nvim/plugged')) " }}}
 " Appearance
 " ====================================================================
-Plug 'frankier/neovim-colors-solarized-truecolor-only'
+Plug 'ipolifemo/neovim-colors-solarized-truecolor-only' " Solarized colorscheme {{{
+let g:solarized_bold = 1
+let g:solarized_underline = 1
+let g:solarized_italic = 1
+let g:terminal_italic = 1
+" }}}
 Plug 'itchyny/lightline.vim' " A light and configurable statusline/tabline plugin for Vim {{{
   let g:lightline = {
         \ 'colorscheme': 'lightline_solarized_dark',
@@ -126,11 +131,11 @@ Plug 'kshenoy/vim-signature' " Plugin to toggle, display and navigate marks {{{
     \ }
 " }}}
 Plug 'tpope/vim-sleuth' " Heuristically set buffer options.
-Plug 'junegunn/limelight.vim' " Hyperfocus-writing in Vim. {{{
-  let g:limelight_default_coefficient = 0.7
-  let g:limelight_conceal_ctermfg = 238
-  nmap <silent> gl :Limelight!!<CR>
-  xmap gl <Plug>(Limelight)
+" Plug 'junegunn/limelight.vim' " Hyperfocus-writing in Vim. {{{
+"   let g:limelight_default_coefficient = 0.7
+"   let g:limelight_conceal_ctermfg = 238
+"   nmap <silent> gl :Limelight!!<CR>
+"   xmap gl <Plug>(Limelight)
 " }}}
 
 " Completion
@@ -156,26 +161,31 @@ Plug 'honza/vim-snippets' " Snippets files for various programming languages.
 
 " File Navigation
 " ====================================================================
-Plug 'scrooloose/nerdtree' " {{{
-  let g:NERDTreeMinimalUI = 1
-  let g:NERDTreeHijackNetrw = 0
-  let g:NERDTreeWinSize = 31
-  let g:NERDTreeChDirMode = 2
-  let g:NERDTreeAutoDeleteBuffer = 1
-  let g:NERDTreeShowBookmarks = 1
-  let g:NERDTreeCascadeOpenSingleChildDir = 1
-
-  map <F1> :call NERDTreeToggleAndFind()<cr>
-  map <F2> :NERDTreeToggle<CR>
-
-  function! NERDTreeToggleAndFind()
-    if (exists('t:NERDTreeBufName') && bufwinnr(t:NERDTreeBufName) != -1)
-      execute ':NERDTreeClose'
-    else
-      execute ':NERDTreeFind'
-    endif
-  endfunction
-" }}}
+Plug 'Shougo/unite.vim'
+Plug 'Shougo/vimfiler.vim' " File explorer {{{
+let g:vimfiler_as_default_explorer = 1
+map <F1> :VimFilerCurrentDir -buffer-name=explorer -split -simple -winwidth=35 -toggle -no-quit<CR>
+"}}}
+" Plug 'scrooloose/nerdtree' " {{{
+"   let g:NERDTreeMinimalUI = 1
+"   let g:NERDTreeHijackNetrw = 0
+"   let g:NERDTreeWinSize = 31
+"   let g:NERDTreeChDirMode = 2
+"   let g:NERDTreeAutoDeleteBuffer = 1
+"   let g:NERDTreeShowBookmarks = 1
+"   let g:NERDTreeCascadeOpenSingleChildDir = 1
+"
+"   map <F1> :call NERDTreeToggleAndFind()<cr>
+"   map <F2> :NERDTreeToggle<CR>
+"
+"   function! NERDTreeToggleAndFind()
+"     if (exists('t:NERDTreeBufName') && bufwinnr(t:NERDTreeBufName) != -1)
+"       execute ':NERDTreeClose'
+"     else
+"       execute ':NERDTreeFind'
+"     endif
+"   endfunction
+" " }}}
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } " A command-line fuzzy finder {{{
    let g:fzf_layout = { 'down': '~40%' }
 " }}}
@@ -221,17 +231,17 @@ Plug 'junegunn/fzf.vim' " Things you can do with fzf and Vim. {{{
   endfunction
   command! -nargs=+ -complete=dir AgIn call SearchWithAgInDirectory(<f-args>)
 " }}}
-Plug 'zenbro/mirror.vim' " Efficient way to edit remote files on multiple environments with Vim. {{{
-  nnoremap <leader>mp :MirrorPush<CR>
-  nnoremap <leader>ml :MirrorPull<CR>
-  nnoremap <leader>md :MirrorDiff<CR>
-  nnoremap <leader>me :MirrorEdit<CR>
-  nnoremap <leader>mo :MirrorOpen<CR>
-  nnoremap <leader>ms :MirrorSSH<CR>
-  nnoremap <leader>mi :MirrorInfo<CR>
-  nnoremap <leader>mc :MirrorConfig<CR>
-" }}}
-
+" Plug 'zenbro/mirror.vim' " Efficient way to edit remote files on multiple environments with Vim. {{{
+"   nnoremap <leader>mp :MirrorPush<CR>
+"   nnoremap <leader>ml :MirrorPull<CR>
+"   nnoremap <leader>md :MirrorDiff<CR>
+"   nnoremap <leader>me :MirrorEdit<CR>
+"   nnoremap <leader>mo :MirrorOpen<CR>
+"   nnoremap <leader>ms :MirrorSSH<CR>
+"   nnoremap <leader>mi :MirrorInfo<CR>
+"   nnoremap <leader>mc :MirrorConfig<CR>
+" " }}}
+"
 " Text Navigation
 " ====================================================================
 Plug 'Lokaltog/vim-easymotion' " Vim motions on speed! {{{
@@ -256,17 +266,17 @@ Plug 'Raimondi/delimitMate' " Provides insert mode auto-completion for quotes, p
   let delimitMate_expand_cr = 2
   let delimitMate_expand_space = 1 " {|} => { | }
 " }}}
-Plug 'AndrewRadev/splitjoin.vim' " A vim plugin that simplifies the transition between multiline and single-line code.
-Plug 'AndrewRadev/switch.vim' " A simple Vim plugin to switch segments of text with predefined replacements. {{{
-  let g:switch_mapping = '\'
+" Plug 'AndrewRadev/splitjoin.vim' " A vim plugin that simplifies the transition between multiline and single-line code.
+" Plug 'AndrewRadev/switch.vim' " A simple Vim plugin to switch segments of text with predefined replacements. {{{
+"   let g:switch_mapping = '\'
 " }}}
-Plug 'tpope/vim-speeddating' " use CTRL-A/CTRL-X to increment dates, times, and more
-Plug 'tpope/vim-abolish' " easily search for, substitute, and abbreviate multiple variants of a word
+" Plug 'tpope/vim-speeddating' " use CTRL-A/CTRL-X to increment dates, times, and more
+" Plug 'tpope/vim-abolish' " easily search for, substitute, and abbreviate multiple variants of a word
 
 " Text Objects
 " ====================================================================
-Plug 'kana/vim-textobj-user' " Create your own text objects.
-Plug 'kana/vim-textobj-indent' " Text objects for indented blocks of lines
+" Plug 'kana/vim-textobj-user' " Create your own text objects.
+" Plug 'kana/vim-textobj-indent' " Text objects for indented blocks of lines
 " Plug 'nelstrom/vim-textobj-rubyblock'
 
 " Languages
@@ -305,16 +315,19 @@ Plug 'scrooloose/syntastic' " {{{
 "    autocmd FileType ruby nnoremap <leader>! :call RubocopAutoCorrection()<CR>
 "  augroup END
 " }}}
-Plug 'mattn/emmet-vim' " Support for expanding abbreviations similar to emmet. {{{
-  let g:user_emmet_leader_key='<Tab>'
-  let g:user_emmet_settings = {
-      \  'javascript.jsx' : {
-      \      'extends' : 'jsx',
-      \  },
-      \}
-  let g:user_emmet_expandabbr_key = '<c-e>'
+" Plug 'mattn/emmet-vim' " Support for expanding abbreviations similar to emmet. {{{
+"   let g:user_emmet_leader_key='<Tab>'
+"   let g:user_emmet_settings = {
+"       \  'javascript.jsx' : {
+"       \      'extends' : 'jsx',
+"       \  },
+"       \}
+"   let g:user_emmet_expandabbr_key = '<c-e>'
 " }}}
-Plug 'Valloric/MatchTagAlways' " Always highlights the enclosing html/xml tags.
+Plug 'Valloric/MatchTagAlways' " Always highlights the enclosing html/xml tags. {{{
+ let g:mta_use_matchparen_group = 0
+ let g:mta_set_default_matchtag_color = 0
+" }}}
 Plug 'tpope/vim-ragtag' " A set of mappings for HTML, XML, PHP, ASP, and more. {{{
   let g:ragtag_global_maps = 1
 " }}}
@@ -330,8 +343,8 @@ Plug 'othree/html5.vim' " HTML5 omnicomplete and syntax.
 Plug 'pangloss/vim-javascript' " Vastly improved Javascript indentation and syntax. {{{
  let g:used_javascript_libs = 'jquery'
 " }}}
-Plug 'mxw/vim-jsx' " React JSX syntax highlighting and indenting.
-Plug 'jparise/vim-graphql' " GraphQL file detection, syntax highlighting, and indentation.
+" Plug 'mxw/vim-jsx' " React JSX syntax highlighting and indenting.
+" Plug 'jparise/vim-graphql' " GraphQL file detection, syntax highlighting, and indentation.
 Plug 'ap/vim-css-color' " Preview colours in source code while editing
 " Plug 'lervag/vimtex' " {{{
   " let g:vimtex_view_method = 'zathura'
@@ -348,81 +361,62 @@ Plug 'StanAngeloff/php.vim' " An up-to-date syntax for PHP (7.x supported).
 
 " Git
 " ====================================================================
-Plug 'tpope/vim-fugitive' " Git wrapper so awesome, it should be illegal. {{{
-  " Fix broken syntax highlight in gitcommit files
-  " (https://github.com/tpope/vim-git/issues/12)
-  let g:fugitive_git_executable = 'LANG=en_US.UTF-8 git'
-
-  nnoremap <silent> <leader>gs :Gstatus<CR>
-  nnoremap <silent> <leader>gd :Gdiff<CR>
-  nnoremap <silent> <leader>gc :Gcommit<CR>
-  nnoremap <silent> <leader>gb :Gblame<CR>
-  nnoremap <silent> <leader>ge :Gedit<CR>
-  nnoremap <silent> <leader>gE :Gedit<space>
-  nnoremap <silent> <leader>gr :Gread<CR>
-  nnoremap <silent> <leader>gR :Gread<space>
-  nnoremap <silent> <leader>gw :Gwrite<CR>
-  nnoremap <silent> <leader>gW :Gwrite!<CR>
-  nnoremap <silent> <leader>gq :Gwq<CR>
-  nnoremap <silent> <leader>gQ :Gwq!<CR>
-
-  function! ReviewLastCommit()
-    if exists('b:git_dir')
-      Gtabedit HEAD^{}
-      nnoremap <buffer> <silent> q :<C-U>bdelete<CR>
-    else
-      echo 'No git a git repository:' expand('%:p')
-    endif
-  endfunction
-  nnoremap <silent> <leader>g` :call ReviewLastCommit()<CR>
-
-  augroup fugitiveSettings
-    autocmd!
-    autocmd FileType gitcommit setlocal nolist
-    autocmd BufReadPost fugitive://* setlocal bufhidden=delete
-  augroup END
-" }}}
-Plug 'airblade/vim-gitgutter' " Shows a git diff in the gutter (sign column) and stages/undoes hunks. {{{
-  let g:gitgutter_map_keys = 0
-  let g:gitgutter_max_signs = 200
-  let g:gitgutter_realtime = 1
-  let g:gitgutter_eager = 1
-  let g:gitgutter_sign_removed = '–'
-  let g:gitgutter_diff_args = '--ignore-space-at-eol'
-  nmap <silent> ]h :GitGutterNextHunk<CR>
-  nmap <silent> [h :GitGutterPrevHunk<CR>
-  nnoremap <silent> <Leader>gu :GitGutterRevertHunk<CR>
-  nnoremap <silent> <Leader>gp :GitGutterPreviewHunk<CR><c-w>j
-  nnoremap cog :GitGutterToggle<CR>
-  nnoremap <Leader>gt :GitGutterAll<CR>
-" }}}
-Plug 'esneider/YUNOcommit.vim' " Y U NO commit after so many writes???
+" Plug 'tpope/vim-fugitive' " Git wrapper so awesome, it should be illegal. {{{
+"   " Fix broken syntax highlight in gitcommit files
+"   " (https://github.com/tpope/vim-git/issues/12)
+"   let g:fugitive_git_executable = 'LANG=en_US.UTF-8 git'
+"
+"   nnoremap <silent> <leader>gs :Gstatus<CR>
+"   nnoremap <silent> <leader>gd :Gdiff<CR>
+"   nnoremap <silent> <leader>gc :Gcommit<CR>
+"   nnoremap <silent> <leader>gb :Gblame<CR>
+"   nnoremap <silent> <leader>ge :Gedit<CR>
+"   nnoremap <silent> <leader>gE :Gedit<space>
+"   nnoremap <silent> <leader>gr :Gread<CR>
+"   nnoremap <silent> <leader>gR :Gread<space>
+"   nnoremap <silent> <leader>gw :Gwrite<CR>
+"   nnoremap <silent> <leader>gW :Gwrite!<CR>
+"   nnoremap <silent> <leader>gq :Gwq<CR>
+"   nnoremap <silent> <leader>gQ :Gwq!<CR>
+"
+"   function! ReviewLastCommit()
+"     if exists('b:git_dir')
+"       Gtabedit HEAD^{}
+"       nnoremap <buffer> <silent> q :<C-U>bdelete<CR>
+"     else
+"       echo 'No git a git repository:' expand('%:p')
+"     endif
+"   endfunction
+"   nnoremap <silent> <leader>g` :call ReviewLastCommit()<CR>
+"
+"   augroup fugitiveSettings
+"     autocmd!
+"     autocmd FileType gitcommit setlocal nolist
+"     autocmd BufReadPost fugitive://* setlocal bufhidden=delete
+"   augroup END
+" " }}}
+" Plug 'airblade/vim-gitgutter' " Shows a git diff in the gutter (sign column) and stages/undoes hunks. {{{
+"   let g:gitgutter_map_keys = 0
+"   let g:gitgutter_max_signs = 200
+"   let g:gitgutter_realtime = 1
+"   let g:gitgutter_eager = 1
+"   let g:gitgutter_sign_removed = '–'
+"   let g:gitgutter_diff_args = '--ignore-space-at-eol'
+"   nmap <silent> ]h :GitGutterNextHunk<CR>
+"   nmap <silent> [h :GitGutterPrevHunk<CR>
+"   nnoremap <silent> <Leader>gu :GitGutterRevertHunk<CR>
+"   nnoremap <silent> <Leader>gp :GitGutterPreviewHunk<CR><c-w>j
+"   nnoremap cog :GitGutterToggle<CR>
+"   nnoremap <Leader>gt :GitGutterAll<CR>
+" " }}}
+" Plug 'esneider/YUNOcommit.vim' " Y U NO commit after so many writes???
 
 " Utility
 " ====================================================================
-Plug 'ludovicchabant/vim-gutentags' " Manages your tag files {{{
-  let g:gutentags_ctags_executable = expand($HOME . '/.local/bin/ctags')
-"  let g:gutentags_trace = 1
-  let g:gutentags_ctags_exclude = [
-      \ '*.min.js',
-      \ '*html*',
-      \ 'jquery*.js',
-      \ '*/vendor/*',
-      \ '*/node_modules/*',
-      \ '*/python2.7/*',
-      \ '*/migrate/*.rb'
-      \ ]
-  let g:gutentags_generate_on_missing = 0
-  let g:gutentags_generate_on_write = 0
-  let g:gutentags_generate_on_new = 0
-  nnoremap <leader>t! :GutentagsUpdate!<CR>
-
-  au FileType php let g:gutentags_ctags_extra_args = ['--fields=+aimlS', '--languages=php']
-" }}}
-Plug 'tpope/vim-characterize' " Unicode character metadata.
-Plug 'tpope/vim-unimpaired' " Pairs of handy bracket mappings. {{{
-  nnoremap coe :set <C-R>=&expandtab ? 'noexpandtab' : 'expandtab'<CR><CR>
-" }}}
+" Plug 'tpope/vim-characterize' " Unicode character metadata.
+" Plug 'tpope/vim-unimpaired' " Pairs of handy bracket mappings. {{{
+"   nnoremap coe :set <C-R>=&expandtab ? 'noexpandtab' : 'expandtab'<CR><CR>
+" " }}}
 Plug 'tpope/vim-eunuch' " Helpers for UNIX.
 " Plug 'tpope/vim-dispatch' " Asynchronous build and test dispatcher.
 " Plug 'janko-m/vim-test' " Run your tests at the speed of thought. {{{
@@ -439,14 +433,14 @@ Plug 'tpope/vim-eunuch' " Helpers for UNIX.
 "   nnoremap <silent> <leader>ra :TestLast<CR>
 "   nnoremap <silent> <leader>ro :TestVisit<CR>
 " " }}}
-Plug 'tyru/open-browser.vim' " Open URI with your favorite browser. {{{
-  let g:netrw_nogx = 1
-  vmap gx <Plug>(openbrowser-smart-search)
-  nmap gx <Plug>(openbrowser-search)
-" }}}
+" Plug 'tyru/open-browser.vim' " Open URI with your favorite browser. {{{
+"   let g:netrw_nogx = 1
+"   vmap gx <Plug>(openbrowser-smart-search)
+"   nmap gx <Plug>(openbrowser-search)
+" " }}}
 Plug 'Shougo/junkfile.vim' " Create temporary file for memo, testing, etc. {{{
   nnoremap <leader>jo :JunkfileOpen
-  let g:junkfile#directory = $HOME . '/config/nvim/cache/junkfile'
+  let g:junkfile#directory = $HOME . '/.config/nvim/cache/junkfile'
 " }}}
 Plug 'junegunn/vim-peekaboo' " See the contents of the registers. {{{
   let g:peekaboo_delay = 400
@@ -484,9 +478,9 @@ let g:vdebug_options= {
 
 " Misc
 " ====================================================================
-Plug 'itchyny/calendar.vim', { 'on': 'Calendar' } " Calendar application. {{{
-  let g:calendar_date_month_name = 1
-" }}}
+" Plug 'itchyny/calendar.vim', { 'on': 'Calendar' } " Calendar application. {{{
+"   let g:calendar_date_month_name = 1
+" " }}}
 " Plug 'xolox/vim-misc'
 " Plug 'xolox/vim-notes' " {{{
 "   let g:notes_directories = ['~/Documents/Notes']
@@ -495,7 +489,7 @@ call plug#end() " Plugins initialization finished {{{
 " }}}
 
 " True Color {{{
-let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+let NVIM_TUI_ENABLE_TRUE_COLOR=1
 set termguicolors
 " }}}
 " Indentation {{{
@@ -534,6 +528,8 @@ highlight SyntasticWarningSign guifg=black guibg=#FFED26 ctermfg=16 ctermbg=11
 highlight SyntasticWargningLine guibg=#171717
 highlight SyntasticStyleWarningSign guifg=black guibg=#bcbcbc ctermfg=16 ctermbg=250
 highlight SyntasticStyleErrorSign guifg=black guibg=#ff8700 ctermfg=16 ctermbg=208
+highlight MatchTag ctermfg=0 ctermbg=13 guifg=#073642 guibg=#6c71c4
+
 " }}}
 " Key Mappings " {{{
 nnoremap <leader>vi :tabedit $MYVIMRC<CR>
@@ -660,7 +656,7 @@ let g:session_dir = '$HOME/.config/nvim/sessions/'
 nnoremap <Leader>sl :wall<Bar>execute "source " . g:session_dir . fnamemodify(getcwd(), ':t')<CR>
 nnoremap <Leader>ss :execute "mksession! " . g:session_dir . fnamemodify(getcwd(), ':t')<CR>
 " }}}
-" Terminal {{{
+" Terminal "{{{
 " ====================================================================
 nnoremap <silent> <leader><Enter> :tabnew<CR>:terminal<CR>
 
@@ -670,13 +666,6 @@ nnoremap <Leader>l<Enter> :rightbelow vnew<CR>:terminal<CR>
 nnoremap <Leader>k<Enter> :leftabove  new<CR>:terminal<CR>
 nnoremap <Leader>j<Enter> :rightbelow new<CR>:terminal<CR>
 
-" Insert mode like
-if has('nvim')
-  tnoremap <expr> <A-r> '<C-\><C-N>"'.nr2char(getchar()).'pi'
-endif
-
-" Open tig
-nnoremap <Leader>gg :tabnew<CR>:terminal tig<CR>
 
 tnoremap <F1> <C-\><C-n>
 tnoremap <C-\><C-\> <C-\><C-n>:bd!<CR>
@@ -686,13 +675,26 @@ function! TerminalInSplit(args)
   execute 'terminal' a:args
 endfunction
 
-nnoremap <leader><F1> :execute 'terminal ranger ' . expand('%:p:h')<CR>
-nnoremap <leader><F2> :terminal ranger<CR>
-augroup terminalSettings
-  autocmd!
-"  autocmd FileType ruby nnoremap <leader>\ :call TerminalInSplit('pry')<CR>
-augroup END
-" }}}
+"
+" let g:terminal_color_0  = '#2e3436'
+" let g:terminal_color_1  = '#cc0000'
+" let g:terminal_color_2  = '#4e9a06'
+" let g:terminal_color_3  = '#c4a000'
+" let g:terminal_color_4  = '#3465a4'
+" let g:terminal_color_5  = '#75507b'
+" let g:terminal_color_6  = '#0b939b'
+" let g:terminal_color_7  = '#d3d7cf'
+" let g:terminal_color_8  = '#555753'
+" let g:terminal_color_9  = '#ef2929'
+" let g:terminal_color_10 = '#8ae234'
+" let g:terminal_color_11 = '#fce94f'
+" let g:terminal_color_12 = '#729fcf'
+" let g:terminal_color_13 = '#ad7fa8'
+" let g:terminal_color_14 = '#00f5e9'
+" let g:terminal_color_15 = '#eeeeec'
+"
+
+"}}}
 " Autocommands {{{
 " ====================================================================
 augroup vimGeneralCallbacks
@@ -700,8 +702,8 @@ augroup vimGeneralCallbacks
   autocmd BufWritePost .nvimrc nested source ~/.nvimrc
 augroup END
 
-augroup fileTypeSpecific
-  autocmd!
+" augroup fileTypeSpecific
+"   autocmd!
 
   " JST support
 "  autocmd BufNewFile,BufRead *.ejs set filetype=jst
@@ -713,10 +715,10 @@ augroup fileTypeSpecific
 "  autocmd BufNewFile,BufRead *.js.erb set filetype=javascript
 
   " Gnuplot support
-  autocmd BufNewFile,BufRead *.plt set filetype=gnuplot
-
+  " autocmd BufNewFile,BufRead *.plt set filetype=gnuplot
+  "
 "  autocmd FileType jst set syntax=htmldjango
-augroup END
+" augroup END
 
 augroup quickFixSettings
   autocmd!
